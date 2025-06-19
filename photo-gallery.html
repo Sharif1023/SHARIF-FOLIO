@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sharunnduu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Enable Tailwind dark mode class strategy
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+</head>
+<body class="bg-white text-gray-900 font-sans dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300">
+
+  <!-- Mobile menu icon with Navbar -->
+  <script defer>
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    // On page load check localStorage for theme
+    window.addEventListener('DOMContentLoaded', () => {
+      if (
+        localStorage.getItem('theme') === 'dark' || 
+        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    });
+  </script>
+
+<header class="bg-white shadow-md fixed top-0 w-full z-50 dark:bg-gray-800 transition-colors duration-300">
+  <div class="container mx-auto flex justify-between items-center px-4 py-4">
+
+
+
+
+
+    <!-- Logo with image -->
+<a href="index.html" class="logo flex items-center space-x-2">
+  <img src="logo-transparent.png" alt="Logo" class="w-10 h-10 rounded-full" />
+  <span><span class="logo-highlight">SHARIF</span>FOLIO</span>
+</a>
+
+<style>
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2563eb; /* blue-600 */
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.1em;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  .logo:hover {
+    color: #ec4899; /* pink-500 */
+  }
+  .logo-highlight {
+    color: #2563eb;
+    position: relative;
+  }
+  .logo-highlight::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: #ec4899;
+    bottom: -5px;
+    left: 0;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+  .logo:hover .logo-highlight::after {
+    width: 110%;
+  }
+</style>
+
+
+
+    <!-- Navigation Menu -->
+    <nav id="mobileMenu" class="absolute top-full left-0 w-full bg-white shadow-md hidden md:flex md:static md:w-auto md:shadow-none space-y-2 md:space-y-0 md:space-x-6 items-center p-4 md:p-0 dark:bg-gray-800 transition-colors duration-300">
+      <a href="index.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Home</a>
+      <a href="projects.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Projects</a>
+      <a href="photo-gallery.html" class="block text-blue-500 dark:hover:text-blue-400 font-semibold">Gallery</a>
+      <a href="about.html" class="block hover:text-blue-500 dark:hover:text-blue-400">About</a>
+      <a href="contact.html" class="block hover:text-blue-500 dark:hover:text-blue-400 ">Contact</a>
+
+      <!-- Dark Mode Toggle for Desktop -->
+      <button onclick="toggleDarkMode()" id="darkModeToggle" aria-label="Toggle Dark Mode" 
+        class="hidden md:block text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 text-2xl transition focus:outline-none">
+        🌙
+      </button>
+    </nav>
+
+    <!-- Right side on mobile: Hamburger + Dark Mode Toggle -->
+    <div class="flex items-center gap-4 md:hidden">
+      <!-- Hamburger Button (Mobile) -->
+      <button onclick="toggleMenu()" class="text-blue-600 dark:text-blue-400 text-2xl focus:outline-none">
+        ☰
+      </button>
+
+      <!-- Dark Mode Toggle for Mobile -->
+      <button onclick="toggleDarkMode()" id="darkModeToggleMobile" aria-label="Toggle Dark Mode" 
+        class="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 text-2xl transition focus:outline-none">
+        🌙
+      </button>
+    </div>
+
+  </div>
+</header>
+
+
+<main class="pt-24 max-w-7xl mx-auto px-4">
+
+  <h1 class="text-4xl font-bold text-center mb-10">📸 My Photo Gallery</h1>
+
+  <!-- Filter Buttons -->
+  <div class="flex justify-center gap-4 mb-12 flex-wrap">
+    <button data-filter="all" class="filter-btn px-5 py-2 rounded-full border border-indigo-600 text-indigo-700 font-semibold hover:bg-indigo-600 hover:text-white transition">All</button>
+    <button data-filter="sea" class="filter-btn px-5 py-2 rounded-full border border-green-600 text-green-700 font-semibold hover:bg-green-600 hover:text-white transition">Sea</button>
+    <button data-filter="hill" class="filter-btn px-5 py-2 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition">Hill</button>
+    <button data-filter="lake" class="filter-btn px-5 py-2 rounded-full border border-blue-600 text-blue-700 font-semibold hover:bg-blue-600 hover:text-white transition">Lake</button>
+    <button data-filter="trail" class="filter-btn px-5 py-2 rounded-full border border-pink-600 text-pink-700 font-semibold hover:bg-pink-600 hover:text-white transition">Trail</button>
+    <button data-filter="nature" class="filter-btn px-5 py-2 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition">Nature</button>
+    <button data-filter="others" class="filter-btn px-5 py-2 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition">Others</button>
+  </div>
+
+  <!-- Gallery Grid -->
+  <div id="gallery" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+
+    
+<!-- Gallery Card-1 -->
+
+<div data-category="sea" class="overflow-hidden rounded-xl shadow-lg cursor-pointer group transition-transform transform hover:scale-[1.02] bg-white">
+  <div class="relative overflow-hidden">
+    <img src="sagor.jpg" alt="Street Portrait" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+    <div class="absolute bottom-2 right-2 bg-white/80 text-xs text-gray-700 px-2 py-0.5 rounded shadow backdrop-blur-sm">
+      📍 Cox Bazar, Bangladesh
+    </div>
+  </div>
+  <div class="p-4">
+    <h3 class="font-bold text-lg text-gray-800 mb-1 group-hover:text-blue-600 transition-colors duration-300">
+      This place is Cox Bazar
+    </h3>
+    <p class="text-sm text-gray-600 mb-2">
+      Cox's Bazar is a coastal town in southeastern Bangladesh, known for the world’s longest natural sandy beach.
+         It's a popular tourist spot,famous for its scenic beauty, blue waters, and nearby attractions like Himchari, 
+         Inani Beach, and Ramu.
+    </p>
+    <div class="text-xs text-gray-400 flex justify-between items-center">
+      <span>📸 Iphone 11</span>
+      <span>🗓 April 2024</span>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Gallery Card-2 -->
+
+<div data-category="trail" class="overflow-hidden rounded-xl shadow-lg cursor-pointer group transition-transform transform hover:scale-[1.02] bg-white">
+  <div class="relative overflow-hidden">
+    <img src="trail.jpg" alt="Street Portrait" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+    <div class="absolute bottom-2 right-2 bg-white/80 text-xs text-gray-700 px-2 py-0.5 rounded shadow backdrop-blur-sm">
+      📍 SITAKUNDO, Bangladesh
+    </div>
+  </div>
+  <div class="p-4">
+    <h3 class="font-bold text-lg text-gray-800 mb-1 group-hover:text-blue-600 transition-colors duration-300">
+      This place is SITAKUNDO.
+    </h3>
+    <p class="text-sm text-gray-600 mb-2">
+      Sitakunda Trail is a popular hiking spot in southeastern Bangladesh, 
+        known for waterfalls, forest paths, and scenic views from Chandranath Hill.
+    </p>
+    <div class="text-xs text-gray-400 flex justify-between items-center">
+      <span>📸 Iphone 11</span>
+      <span>🗓 March 2024</span>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Gallery Card-3 -->
+<div data-category="hill" class="overflow-hidden rounded-xl shadow-lg cursor-pointer group transition-transform transform hover:scale-[1.02] bg-white">
+  <div class="relative overflow-hidden">
+    <img src="mirinja.jpg" alt="Street Portrait" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+    <div class="absolute bottom-2 right-2 bg-white/80 text-xs text-gray-700 px-2 py-0.5 rounded shadow backdrop-blur-sm">
+      📍 Chittagong, Bangladesh
+    </div>
+  </div>
+  <div class="p-4">
+    <h3 class="font-bold text-lg text-gray-800 mb-1 group-hover:text-blue-600 transition-colors duration-300">
+      This place is Alikodom.
+    </h3>
+    <p class="text-sm text-gray-600 mb-2">
+      Mirinja Valley is a scenic hilltop in Bandarban, offering stunning views of the Bay of Bengal,
+         rivers, and surrounding hills. It’s known for sunsets and peaceful nature.
+    </p>
+    <div class="text-xs text-gray-400 flex justify-between items-center">
+      <span>📸 Iphone 14</span>
+      <span>🗓 may 2024</span>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Gallery Card-4 -->
+<div data-category="lake" class="overflow-hidden rounded-xl shadow-lg cursor-pointer group transition-transform transform hover:scale-[1.02] bg-white">
+  <div class="relative overflow-hidden">
+    <img src="kaptai.jpg" alt="Street Portrait" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+    <div class="absolute bottom-2 right-2 bg-white/80 text-xs text-gray-700 px-2 py-0.5 rounded shadow backdrop-blur-sm">
+      📍 Kaptai, Bangladesh
+    </div>
+  </div>
+  <div class="p-4">
+    <h3 class="font-bold text-lg text-gray-800 mb-1 group-hover:text-blue-600 transition-colors duration-300">
+      This place is KAPTAI.
+    </h3>
+    <p class="text-sm text-gray-600 mb-2">
+      Kaptai Lake is the largest man-made lake in Bangladesh, 
+        located in Rangamati. Created by damming the Karnaphuli River, it’s a popular spot for boating, 
+        fishing, and nature trips. The lake is surrounded by hills and forests, making it a beautiful destination in 
+        the Chittagong Hill Tracts.
+    </p>
+    <div class="text-xs text-gray-400 flex justify-between items-center">
+      <span>📸 Iphone 13</span>
+      <span>🗓 April 2024</span>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Gallery Card-5 -->
+<div data-category="hill" class="overflow-hidden rounded-xl shadow-lg cursor-pointer group transition-transform transform hover:scale-[1.02] bg-white">
+  <div class="relative overflow-hidden">
+    <img src="bandarban.jpg" alt="Street Portrait" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+    <div class="absolute bottom-2 right-2 bg-white/80 text-xs text-gray-700 px-2 py-0.5 rounded shadow backdrop-blur-sm">
+      📍 Chittagong, Bangladesh
+    </div>
+  </div>
+  <div class="p-4">
+    <h3 class="font-bold text-lg text-gray-800 mb-1 group-hover:text-blue-600 transition-colors duration-300">
+      This place is Bandarban.
+    </h3>
+    <p class="text-sm text-gray-600 mb-2">
+      Nilachal is a hilltop viewpoint near Bandarban, known for its stunning views, sunsets, and clouds.
+         It’s a favorite spot for tourists seeking natural beauty.
+    </p>
+    <div class="text-xs text-gray-400 flex justify-between items-center">
+      <span>📸 Iphone 13</span>
+      <span>🗓 April 2023</span>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Gallery Card-6 -->
+<div data-category="trail" class="overflow-hidden rounded-xl shadow-lg cursor-pointer group transition-transform transform hover:scale-[1.02] bg-white">
+  <div class="relative overflow-hidden">
+    <img src="devotakum.jpg" alt="Street Portrait" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+    <div class="absolute bottom-2 right-2 bg-white/80 text-xs text-gray-700 px-2 py-0.5 rounded shadow backdrop-blur-sm">
+      📍 Bandarban, Bangladesh
+    </div>
+  </div>
+  <div class="p-4">
+    <h3 class="font-bold text-lg text-gray-800 mb-1 group-hover:text-blue-600 transition-colors duration-300">
+      This place is Bandarban.
+    </h3>
+    <p class="text-sm text-gray-600 mb-2">
+      Debotakhum is a stunning hill gorge adventure with bamboo rafting, jungle silence, and dramatic cliffs—perfect for nature lovers and thrill-seekers. 
+      Best visited post-monsoon with a guide and good prep.
+    </p>
+    <div class="text-xs text-gray-400 flex justify-between items-center">
+      <span>📸 Iphone 13</span>
+      <span>🗓 January 2025</span>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Gallery Card-7 -->
+<div data-category="nature" class="overflow-hidden rounded-xl shadow-lg cursor-pointer group transition-transform transform hover:scale-[1.02] bg-white">
+  <div class="relative overflow-hidden">
+    <img src="jorna.jpg" alt="Street Portrait" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+    <div class="absolute bottom-2 right-2 bg-white/80 text-xs text-gray-700 px-2 py-0.5 rounded shadow backdrop-blur-sm">
+      📍 Shitakundu, Bangladesh
+    </div>
+  </div>
+  <div class="p-4">
+    <h3 class="font-bold text-lg text-gray-800 mb-1 group-hover:text-blue-600 transition-colors duration-300">
+      This place is Mirshorai.
+    </h3>
+    <p class="text-sm text-gray-600 mb-2">
+      Mirsarai hills are home to stunning waterfalls like Khoiyachora, perfect for post-monsoon trekking. Expect scenic beauty, 
+      slippery trails, and adventure—best with proper gear and a local guide.
+    </p>
+    <div class="text-xs text-gray-400 flex justify-between items-center">
+      <span>📸 Iphone 12</span>
+      <span>🗓 January 2022</span>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Gallery Card-8 -->
+<div data-category="sea" class="overflow-hidden rounded-xl shadow-lg cursor-pointer group transition-transform transform hover:scale-[1.02] bg-white">
+  <div class="relative overflow-hidden">
+    <img src="haor (1).jpg" alt="Street Portrait" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+    <div class="absolute bottom-2 right-2 bg-white/80 text-xs text-gray-700 px-2 py-0.5 rounded shadow backdrop-blur-sm">
+      📍 Tanguar Hoar, Bangladesh
+    </div>
+  </div>
+  <div class="p-4">
+    <h3 class="font-bold text-lg text-gray-800 mb-1 group-hover:text-blue-600 transition-colors duration-300">
+      This place is Sylhet.
+    </h3>
+    <p class="text-sm text-gray-600 mb-2">
+      Tanguar Haor is a vast wetland in Sunamganj, Bangladesh, known for its stunning natural beauty,
+       seasonal bird migrations, and crystal-clear waters. Surrounded by the Meghalaya hills, it offers boat rides, floating villages, 
+      and a peaceful escape into nature—especially beautiful during the rainy season.
+    </p>
+    <div class="text-xs text-gray-400 flex justify-between items-center">
+      <span>📸 Iphone 16</span>
+      <span>🗓 May 2025</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- Gallery Card-9 -->
+<div data-category="lake" class="overflow-hidden rounded-xl shadow-lg cursor-pointer group transition-transform transform hover:scale-[1.02] bg-white">
+  <div class="relative overflow-hidden">
+    <img src="Nildri.jpg" alt="Street Portrait" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+    <div class="absolute bottom-2 right-2 bg-white/80 text-xs text-gray-700 px-2 py-0.5 rounded shadow backdrop-blur-sm">
+      📍 Niladri lake, Bangladesh
+    </div>
+  </div>
+  <div class="p-4">
+    <h3 class="font-bold text-lg text-gray-800 mb-1 group-hover:text-blue-600 transition-colors duration-300">
+      This place is Sylhet.
+    </h3>
+    <p class="text-sm text-gray-600 mb-2">
+      Niladri Lake, located in Tekerghat, Sunamganj, is famous for its crystal-blue water and scenic hills. Bordering India, 
+      the lake offers a peaceful, picturesque spot perfect for day trips, especially during the monsoon when its beauty peaks
+    </p>
+    <div class="text-xs text-gray-400 flex justify-between items-center">
+      <span>📸 Iphone 16</span>
+      <span>🗓 May 2025</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- Gallery Card-9 -->
+<div data-category="nature" class="overflow-hidden rounded-xl shadow-lg cursor-pointer group transition-transform transform hover:scale-[1.02] bg-white">
+  <div class="relative overflow-hidden">
+    <img src="megh.jpg" alt="Street Portrait" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+    <div class="absolute bottom-2 right-2 bg-white/80 text-xs text-gray-700 px-2 py-0.5 rounded shadow backdrop-blur-sm">
+      📍 Niladri lake, Bangladesh
+    </div>
+  </div>
+  <div class="p-4">
+    <h3 class="font-bold text-lg text-gray-800 mb-1 group-hover:text-blue-600 transition-colors duration-300">
+      This place is Sylhet.
+    </h3>
+    <p class="text-sm text-gray-600 mb-2">
+      Pahare Magh are an indigenous Buddhist community living in the hills of Bangladesh, 
+      mainly Bandarban, known for their unique culture and traditions.
+    </p>
+    <div class="text-xs text-gray-400 flex justify-between items-center">
+      <span>📸 Iphone 16</span>
+      <span>🗓 May 2025</span>
+    </div>
+  </div>
+</div>
+
+
+    <div data-category="sea" class="overflow-hidden rounded-xl shadow-lg cursor-pointer group transition-transform transform hover:scale-[1.02] bg-white">
+  <div class="relative overflow-hidden">
+    <img src="coxpani.jpg" alt="Street Portrait" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+    <div class="absolute bottom-2 right-2 bg-white/80 text-xs text-gray-700 px-2 py-0.5 rounded shadow backdrop-blur-sm">
+      📍 Cox Bazar, Bangladesh
+    </div>
+  </div>
+  <div class="p-4">
+    <h3 class="font-bold text-lg text-gray-800 mb-1 group-hover:text-blue-600 transition-colors duration-300">
+      This place is Cox Bazar
+    </h3>
+    <p class="text-sm text-gray-600 mb-2">
+      Cox's Bazar is a coastal town in southeastern Bangladesh, known for the world’s longest natural sandy beach.
+         It's a popular tourist spot,famous for its scenic beauty, blue waters, and nearby attractions like Himchari, 
+         Inani Beach, and Ramu.
+    </p>
+    <div class="text-xs text-gray-400 flex justify-between items-center">
+      <span>📸 Iphone 13</span>
+      <span>🗓 April 2022</span>
+    </div>
+  </div>
+</div>
+
+  
+ <div data-category="sea" class="overflow-hidden rounded-xl shadow-lg cursor-pointer group transition-transform transform hover:scale-[1.02] bg-white">
+  <div class="relative overflow-hidden">
+    <img src="goliakhali.jpg" alt="Street Portrait" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+    <div class="absolute bottom-2 right-2 bg-white/80 text-xs text-gray-700 px-2 py-0.5 rounded shadow backdrop-blur-sm">
+      📍 Guliakhali, Bangladesh
+    </div>
+  </div>
+  <div class="p-4">
+    <h3 class="font-bold text-lg text-gray-800 mb-1 group-hover:text-blue-600 transition-colors duration-300">
+      This place is Guliakhali
+    </h3>
+    <p class="text-sm text-gray-600 mb-2">
+      Guliakhali Beach, located in Sitakunda, Chattogram, is a unique beach where the sea meets grassy green wetlands. Known
+       for its serene beauty, scattered mangrove trees, and peaceful atmosphere, it's perfect for nature lovers seeking a quiet, scenic escape.
+    </p>
+    <div class="text-xs text-gray-400 flex justify-between items-center">
+      <span>📸 Iphone 11</span>
+      <span>🗓 April 2025</span>
+    </div>
+  </div>
+</div>
+
+    <div data-category="others" class="overflow-hidden rounded-xl shadow-lg cursor-pointer group">
+      <img src="crv.jpg" alt="People 2" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300" />
+      <div class="p-3 bg-white">
+        <h3 class="font-semibold text-gray-700">Chittagong</h3>
+      </div>
+    </div>
+
+    <div data-category="nature" class="overflow-hidden rounded-xl shadow-lg cursor-pointer group">
+      <img src="shimul.jpg" alt="Nature 3" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300" />
+      <div class="p-3 bg-white">
+        <h3 class="font-semibold text-gray-700">Shimul Bagan</h3>
+      </div>
+    </div>
+
+    <div data-category="others" class="overflow-hidden rounded-xl shadow-lg cursor-pointer group">
+      <img src="sunflower.JPG" alt="Architecture 3" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300" />
+      <div class="p-3 bg-white">
+        <h3 class="font-semibold text-gray-700">Sunflower</h3>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+
+
+
+
+<!-- Modal -->
+<div id="modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
+  <div class="relative max-w-4xl max-h-[90vh] p-4">
+    <button id="closeModal" class="absolute top-2 right-5 text-white text-4xl font-bold hover:text-red-500">&times;</button>
+    <img id="modalImage" src="" alt="Expanded Photo" class="max-w-full max-h-[80vh] rounded-lg shadow-lg" />
+    <p id="modalCaption" class="text-white mt-4 text-center text-lg font-semibold"></p>
+  </div>
+</div>
+
+<script>
+  // Filter logic
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const galleryItems = document.querySelectorAll('#gallery > div');
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+      
+      // Set active button style
+      filterButtons.forEach(b => b.classList.remove('bg-indigo-600', 'text-white'));
+      btn.classList.add('bg-indigo-600', 'text-white');
+
+      galleryItems.forEach(item => {
+        if (filter === 'all' || item.dataset.category === filter) {
+          item.classList.remove('hidden');
+          item.classList.add('block');
+        } else {
+          item.classList.remove('block');
+          item.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  // Modal logic
+  const modal = document.getElementById('modal');
+  const modalImage = document.getElementById('modalImage');
+  const modalCaption = document.getElementById('modalCaption');
+  const closeModalBtn = document.getElementById('closeModal');
+
+  document.querySelectorAll('#gallery > div').forEach(item => {
+    item.addEventListener('click', () => {
+      const img = item.querySelector('img');
+      modalImage.src = img.src;
+      modalImage.alt = img.alt;
+      modalCaption.textContent = item.querySelector('h3').textContent;
+      modal.classList.remove('hidden');
+    });
+  });
+
+  closeModalBtn.addEventListener('click', () => {
+    modal.classList.add('hidden');
+    modalImage.src = '';
+    modalCaption.textContent = '';
+  });
+
+  // Close modal clicking outside the image area
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.add('hidden');
+      modalImage.src = '';
+      modalCaption.textContent = '';
+    }
+  });
+
+  // Initialize with "All" filter active on load
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('.filter-btn[data-filter="all"]').click();
+  });
+</script>
+
+
+<!-- Footer -->
+<footer class="bg-indigo-50 mt-20 shadow-inner rounded-t-xl py-12 px-20 dark:bg-gray-900 dark:text-gray-300 transition-all duration-300">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10  md:text-left">
+
+    <!-- Brand Info -->
+    <div>
+      <h2 class="text-2xl font-bold text-indigo-600 dark:text-indigo-400 mb-2">Sharif Islam</h2>
+      <p class="text-sm text-gray-700 dark:text-gray-400">Full Stack Web Developer</p>
+      <p class="text-sm mt-2">📧 sharifislam02001@gmail.com</p>
+      <p class="text-sm">📞 +880 1316 785 389</p>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="index.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Home</a></li>
+        <li><a href="projects.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Projects</a></li>
+        <li><a href="photo-gallery.html" class="block text-blue-500 dark:hover:text-blue-400 font-semibold">Gallery</a></li>
+        <li><a href="about.html" class="block hover:text-blue-500 dark:hover:text-blue-400">About</a></li>
+        <li><a href="contact.html" class="block hover:text-blue-500 dark:hover:text-blue-400 ">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Social Media -->
+    <div>
+      <h3 class="text-lg font-semibold mb-4">Follow Me</h3>
+      <div class="flex justify-left md:justify-start space-x-6 text-indigo-600 dark:text-indigo-400">
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/share/14yneyKJkNx/?mibextid=wwXIfr" target="_blank" aria-label="Facebook"
+          class="hover:text-blue-800 hover:scale-110 transition-transform">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M22.675 0h-21.35C.597 0 0 .6 0 1.337v21.326C0 23.4.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.466.099 2.797.143v3.24l-1.92.001c-1.504 0-1.796.715-1.796 1.764v2.313h3.59l-.467 3.622h-3.123V24h6.116c.728 0 1.324-.6 1.324-1.337V1.337C24 .6 23.403 0 22.675 0z"/>
+          </svg>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/sharunduu.fly" target="_blank" aria-label="Instagram"
+          class="hover:text-pink-600 hover:scale-110 transition-transform">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 2A3.75 3.75 0 004 7.75v8.5A3.75 3.75 0 007.75 20h8.5a3.75 3.75 0 003.75-3.75v-8.5A3.75 3.75 0 0016.25 4h-8.5zm8.25 2.25a1 1 0 110 2 1 1 0 010-2zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/>
+          </svg>
+        </a>
+
+        <!-- Twitter -->
+        <a href="https://twitter.com/yourusername" target="_blank" aria-label="Twitter"
+          class="hover:text-yellow-600 hover:scale-110 transition-transform">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M23 3a10.9 10.9 0 01-3.14.86A5.48 5.48 0 0022.4 1.84a10.86 10.86 0 01-3.45 1.3 5.43 5.43 0 00-9.3 4.95A15.4 15.4 0 011 4.39a5.42 5.42 0 001.67 7.26 5.36 5.36 0 01-2.44-.67v.07a5.43 5.43 0 004.36 5.32 5.45 5.45 0 01-2.44.09 5.43 5.43 0 005.07 3.77A10.9 10.9 0 012 21.54c-.44 0-.87-.03-1.3-.08A15.39 15.39 0 008.34 24c10 0 15.5-8.29 15.5-15.5l-.02-.7A11 11 0 0023 3z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+
+    <!-- Google Map (Smaller) -->
+    <div>
+      <h3 class="text-lg font-semibold mb-4 text-indigo-600 dark:text-indigo-400">📍 My Location</h3>
+      <div class="rounded-xl overflow-hidden shadow-md">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3689.8767321339674!2d91.84313577451971!3d22.35828284079263!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30ad276e3d11ddf3%3A0xf80e51252b33d23!2sBoro%20Miah%20Masjid!5e0!3m2!1sen!2sbd!4v1750322242888!5m2!1sen!2sbd"
+          width="100%" height="160" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Divider with Logo Right Next to Text -->
+<div class="border-t border-gray-300 dark:border-gray-700 mt-10 pt-4 px-4 text-sm text-gray-600 dark:text-gray-400 text-center flex items-center justify-center gap-2">
+  <span>© 2025 Sharif Islam. All rights reserved.</span>
+  <img src="logo-transparent.png" alt="Logo" class="w-16 h-16 rounded-full" />
+</div>
+
+  <!-- Back to Top Button -->
+  <button id="backToTopBtn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+    class="fixed left-4 bottom-8 hidden px-4 py-2 bg-indigo-600 text-white rounded-full hover:bg-pink-600 transition z-50">
+    ↑ Top
+  </button>
+</footer>
+
+
+
+
+<script>
+  const backToTopBtn = document.getElementById('backToTopBtn');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) { // Show button after 30px scroll
+      backToTopBtn.classList.remove('hidden');
+    } else {
+      backToTopBtn.classList.add('hidden');
+    }
+  });
+</script>
+
+
+
+
+
+
+<script>
+function toggleDarkMode() {
+  const html = document.documentElement;
+  const iconDesktop = document.getElementById('darkModeToggle');
+  const iconMobile = document.getElementById('darkModeToggleMobile');
+
+  html.classList.toggle('dark');
+  const isDark = html.classList.contains('dark');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  if (iconDesktop) iconDesktop.textContent = isDark ? '☀️' : '🌙';
+  if (iconMobile) iconMobile.textContent = isDark ? '☀️' : '🌙';
+}
+
+// Load theme and sync icons
+window.addEventListener('DOMContentLoaded', () => {
+  const iconDesktop = document.getElementById('darkModeToggle');
+  const iconMobile = document.getElementById('darkModeToggleMobile');
+  const savedTheme = localStorage.getItem('theme');
+
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+
+  document.documentElement.classList.toggle('dark', shouldBeDark);
+  const icon = shouldBeDark ? '☀️' : '🌙';
+  if (iconDesktop) iconDesktop.textContent = icon;
+  if (iconMobile) iconMobile.textContent = icon;
+});
+</script>
+
+
+</body>
+</html>

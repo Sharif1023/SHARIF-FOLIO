@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sharunnduu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Enable Tailwind dark mode class strategy
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+</head>
+<body class="bg-white text-gray-900 font-sans dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300">
+
+
+  <!-- Mobile menu icon with Navbar -->
+<script defer>
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('hidden');
+  }
+</script>
+</head>
+<body class="bg-white text-gray-900 font-sans dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300">
+
+  <!-- Mobile menu icon with Navbar -->
+  <script defer>
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    // On page load check localStorage for theme
+    window.addEventListener('DOMContentLoaded', () => {
+      if (
+        localStorage.getItem('theme') === 'dark' || 
+        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    });
+  </script>
+
+<header class="bg-white shadow-md fixed top-0 w-full z-50 dark:bg-gray-800 transition-colors duration-300">
+  <div class="container mx-auto flex justify-between items-center px-4 py-4">
+
+
+
+
+
+    <!-- Logo with image -->
+<a href="index.html" class="logo flex items-center space-x-2">
+  <img src="logo-transparent.png" alt="Logo" class="w-10 h-10 rounded-full" />
+  <span><span class="logo-highlight">SHARIF</span>FOLIO</span>
+</a>
+
+<style>
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2563eb; /* blue-600 */
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.1em;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  .logo:hover {
+    color: #ec4899; /* pink-500 */
+  }
+  .logo-highlight {
+    color: #2563eb;
+    position: relative;
+  }
+  .logo-highlight::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: #ec4899;
+    bottom: -5px;
+    left: 0;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+  .logo:hover .logo-highlight::after {
+    width: 110%;
+  }
+</style>
+
+
+
+
+    <!-- Navigation Menu -->
+    <nav id="mobileMenu" class="absolute top-full left-0 w-full bg-white shadow-md hidden md:flex md:static md:w-auto md:shadow-none space-y-2 md:space-y-0 md:space-x-6 items-center p-4 md:p-0 dark:bg-gray-800 transition-colors duration-300">
+      <a href="index.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Home</a>
+      <a href="projects.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Projects</a>
+      <a href="photo-gallery.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Gallery</a>
+      <a href="about.html" class="block text-blue-500 dark:hover:text-blue-400 font-semibold">About</a>
+      <a href="contact.html" class="block hover:text-blue-500 dark:hover:text-blue-400 ">Contact</a>
+
+      <!-- Dark Mode Toggle for Desktop -->
+      <button onclick="toggleDarkMode()" id="darkModeToggle" aria-label="Toggle Dark Mode" 
+        class="hidden md:block text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 text-2xl transition focus:outline-none">
+        🌙
+      </button>
+    </nav>
+
+    <!-- Right side on mobile: Hamburger + Dark Mode Toggle -->
+    <div class="flex items-center gap-4 md:hidden">
+      <!-- Hamburger Button (Mobile) -->
+      <button onclick="toggleMenu()" class="text-blue-600 dark:text-blue-400 text-2xl focus:outline-none">
+        ☰
+      </button>
+
+      <!-- Dark Mode Toggle for Mobile -->
+      <button onclick="toggleDarkMode()" id="darkModeToggleMobile" aria-label="Toggle Dark Mode" 
+        class="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 text-2xl transition focus:outline-none">
+        🌙
+      </button>
+    </div>
+
+  </div>
+</header><br><br><br>
+
+
+<!-- About Section -->
+<!-- About + Skills Section -->
+<main class="max-w-6xl mx-auto px-6 py-20 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 rounded-2xl shadow-2xl animate-fade-in grid grid-cols-1 md:grid-cols-2 gap-16">
+
+  <!-- Left: About Me -->
+  <section class="bg-white p-10 rounded-xl shadow-md flex flex-col">
+    <h1 class="text-4xl font-extrabold mb-6 text-indigo-700 text-center drop-shadow">About Me</h1>
+
+    <p class="text-lg text-gray-800 mb-6 leading-relaxed text-center">
+      Hi! I’m <span class="font-bold text-indigo-600">Shariful Islam</span>, a 
+      <span class="italic font-medium text-pink-600">Full Stack Web Developer</span> passionate about modern technologies and building impactful digital experiences.
+    </p>
+
+    <!-- Education -->
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-indigo-600 mb-2">🎓 Education</h2>
+      <p class="text-gray-700 leading-relaxed">
+        Pursuing a <span class="font-semibold text-indigo-500">BSc in CSE</span> at 
+        <span class="font-semibold">Premier University</span>. My academic journey is supported by practical, real-world projects.
+      </p>
+    </div>
+
+    <!-- Passion -->
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-indigo-600 mb-2">💡 Passion</h2>
+      <p class="text-gray-700 leading-relaxed">
+        I enjoy building <span class="font-semibold">responsive</span> and <span class="font-semibold">user-centered</span> websites, tackling real problems with code, and always staying curious.
+      </p>
+    </div>
+
+    <!-- Goals -->
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-indigo-600 mb-2">🎯 Goals</h2>
+      <p class="text-gray-700 leading-relaxed">
+        I aspire to become a <span class="font-semibold">top-level developer</span>, lead impactful projects, contribute to <span class="italic text-pink-600">open-source</span>, and launch my own tech venture.
+      </p>
+    </div>
+
+    <!-- Timeline -->
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-indigo-600 mb-2">🕒 Timeline</h2>
+      <ul class="list-disc list-inside text-gray-700 space-y-1">
+        <li><strong>2022 - Present:</strong> BSc in CSE at Premier University</li>
+        <li><strong>2021:</strong> Started Web Development & built my first portfolio</li>
+      </ul>
+    </div>
+
+    <!-- Resume Download Button -->
+    <div class="mt-auto flex justify-center">
+      <a href="Sharif's CV .pdf" download
+        class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-pink-600 transition transform hover:scale-105 shadow-lg">
+        📄 Download CV
+      </a>
+    </div><br>
+
+   <div class="flex justify-center space-x-6">
+    <a href="https://github.com/Sharif1023" target="_blank" aria-label="GitHub" class="text-indigo-600 hover:text-pink-600 transition-transform transform hover:scale-110">
+      <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.6-1.4-1.5-1.8-1.5-1.8-1.2-.9 0-.9 0-.9 1.3.1 2 1.3 2 1.3 1.2 2 3.1 1.4 3.9 1.1.1-.9.5-1.4.9-1.7-2.6-.3-5.3-1.3-5.3-6 0-1.3.5-2.3 1.3-3.1-.1-.3-.6-1.6.1-3.2 0 0 1.1-.4 3.3 1.2a11.3 11.3 0 0 1 6 0c2.2-1.6 3.3-1.2 3.3-1.2.7 1.6.2 2.9.1 3.2.8.8 1.3 1.8 1.3 3.1 0 4.7-2.7 5.7-5.3 6 .6.5 1 1.3 1 2.6v3.9c0 .3.2.6.8.5A10.5 10.5 0 0 0 23.5 12C23.5 5.7 18.3.5 12 .5z"/></svg>
+    </a>
+    <a href="https://linkedin.com/in/yourusername" target="_blank" aria-label="LinkedIn" class="text-indigo-600 hover:text-pink-600 transition-transform transform hover:scale-110">
+      <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M4.98 3.5c0 1.38-1.11 2.5-2.48 2.5C1.12 6 0 4.88 0 3.5S1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 21h4.96v-12H.5v12zM7.5 9h4.76v1.64c.66-1.25 3.42-1.35 3.42 1.19V21H15v-6.8c0-3.26-4-3.14-4 0V21H7.5V9z"/></svg>
+    </a>
+  </div>
+  </section>
+
+  <!-- Right: Skills -->
+  <section class="bg-white p-10 rounded-xl shadow-md">
+    <h2 class="text-4xl font-extrabold mb-8 text-indigo-700 drop-shadow text-center">Skills</h2>
+    <ul class="space-y-6">
+
+      <li>
+        <div class="flex justify-between items-center mb-1">
+          <div class="flex items-center space-x-3">
+            <!-- React Icon -->
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="w-6 h-6"/>
+            <span class="text-indigo-600 font-semibold">React</span>
+          </div>
+          <span class="text-sm text-gray-500">85%</span>
+        </div>
+        <progress class="progress-bar w-full h-3 rounded" value="85" max="100"></progress>
+      </li>
+
+      <li>
+        <div class="flex justify-between items-center mb-1">
+          <div class="flex items-center space-x-3">
+            <!-- Node.js Icon -->
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" class="w-6 h-6"/>
+            <span class="text-indigo-600 font-semibold">Node.js</span>
+          </div>
+          <span class="text-sm text-gray-500">80%</span>
+        </div>
+        <progress class="progress-bar w-full h-3 rounded" value="80" max="100"></progress>
+      </li>
+
+      <li>
+        <div class="flex justify-between items-center mb-1">
+          <div class="flex items-center space-x-3">
+            <!-- Tailwind CSS Icon -->
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" alt="Tailwind CSS" class="w-6 h-6"/>
+            <span class="text-indigo-600 font-semibold">Tailwind CSS</span>
+          </div>
+          <span class="text-sm text-gray-500">90%</span>
+        </div>
+        <progress class="progress-bar w-full h-3 rounded" value="90" max="100"></progress>
+      </li>
+
+      <li>
+        <div class="flex justify-between items-center mb-1">
+          <div class="flex items-center space-x-3">
+            <!-- JavaScript Icon -->
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="w-6 h-6"/>
+            <span class="text-indigo-600 font-semibold">JavaScript</span>
+          </div>
+          <span class="text-sm text-gray-500">88%</span>
+        </div>
+        <progress class="progress-bar w-full h-3 rounded" value="88" max="100"></progress>
+      </li>
+
+      <li>
+        <div class="flex justify-between items-center mb-1">
+          <div class="flex items-center space-x-3">
+            <!-- MongoDB Icon -->
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" class="w-6 h-6"/>
+            <span class="text-indigo-600 font-semibold">MongoDB</span>
+          </div>
+          <span class="text-sm text-gray-500">75%</span>
+        </div>
+        <progress class="progress-bar w-full h-3 rounded" value="75" max="100"></progress>
+      </li>
+
+      <li>
+      <div class="flex justify-between items-center mb-1">
+        <div class="flex items-center space-x-3">
+          <!-- HTML5 Icon -->
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" class="w-6 h-6" />
+          <span class="text-indigo-600 font-semibold">HTML5</span>
+        </div>
+        <span class="text-sm text-gray-500">95%</span>
+      </div>
+      <progress class="progress-bar w-full h-3 rounded" value="95" max="100"></progress>
+    </li>
+
+    <li>
+      <div class="flex justify-between items-center mb-1">
+        <div class="flex items-center space-x-3">
+          <!-- CSS3 Icon -->
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" class="w-6 h-6" />
+          <span class="text-indigo-600 font-semibold">CSS3</span>
+        </div>
+        <span class="text-sm text-gray-500">92%</span>
+      </div>
+      <progress class="progress-bar w-full h-3 rounded" value="92" max="100"></progress>
+    </li>
+
+    <li>
+      <div class="flex justify-between items-center mb-1">
+        <div class="flex items-center space-x-3">
+          <!-- Firebase Icon -->
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase" class="w-6 h-6" />
+          <span class="text-indigo-600 font-semibold">Firebase</span>
+        </div>
+        <span class="text-sm text-gray-500">80%</span>
+      </div>
+      <progress class="progress-bar w-full h-3 rounded" value="80" max="100"></progress>
+    </li>
+
+    <li>
+      <div class="flex justify-between items-center mb-1">
+        <div class="flex items-center space-x-3">
+          <!-- Express Icon -->
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express.js" class="w-6 h-6 bg-white rounded" />
+          <span class="text-indigo-600 font-semibold">Express.js</span>
+        </div>
+        <span class="text-sm text-gray-500">78%</span>
+      </div>
+      <progress class="progress-bar w-full h-3 rounded" value="78" max="100"></progress>
+    </li>
+
+    <li>
+      <div class="flex justify-between items-center mb-1">
+        <div class="flex items-center space-x-3">
+          <!-- Git Icon -->
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="w-6 h-6" />
+          <span class="text-indigo-600 font-semibold">Git & GitHub</span>
+        </div>
+        <span class="text-sm text-gray-500">85%</span>
+      </div>
+      <progress class="progress-bar w-full h-3 rounded" value="85" max="100"></progress>
+    </li>
+
+    </ul>
+  </section>
+</main>
+
+<style>
+  .animate-fade-in {
+    animation: fadeInUp 1s ease forwards;
+  }
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  progress[value] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+  }
+
+  progress::-webkit-progress-bar {
+    background-color: #e0e7ff; /* indigo-100 */
+    border-radius: 9999px;
+  }
+
+  progress::-webkit-progress-value {
+    background-color: #6366f1; /* indigo-500 */
+    border-radius: 9999px;
+  }
+
+  progress::-moz-progress-bar {
+    background-color: #6366f1;
+    border-radius: 9999px;
+  }
+</style>
+
+
+<!-- Footer -->
+<footer class="bg-indigo-50 mt-20 shadow-inner rounded-t-xl py-12 px-20 dark:bg-gray-900 dark:text-gray-300 transition-all duration-300">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10  md:text-left">
+
+    <!-- Brand Info -->
+    <div>
+      <h2 class="text-2xl font-bold text-indigo-600 dark:text-indigo-400 mb-2">Sharif Islam</h2>
+      <p class="text-sm text-gray-700 dark:text-gray-400">Full Stack Web Developer</p>
+      <p class="text-sm mt-2">📧 sharifislam02001@gmail.com</p>
+      <p class="text-sm">📞 +880 1316 785 389</p>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="index.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Home</a></li>
+        <li><a href="projects.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Projects</a></li>
+        <li><a href="photo-gallery.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Gallery</a></li>
+        <li><a href="about.html" class="block text-blue-500 dark:hover:text-blue-400 font-semibold">About</a></li>
+        <li><a href="contact.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Social Media -->
+    <div>
+      <h3 class="text-lg font-semibold mb-4">Follow Me</h3>
+      <div class="flex justify-left md:justify-start space-x-6 text-indigo-600 dark:text-indigo-400">
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/share/14yneyKJkNx/?mibextid=wwXIfr" target="_blank" aria-label="Facebook"
+          class="hover:text-blue-800 hover:scale-110 transition-transform">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M22.675 0h-21.35C.597 0 0 .6 0 1.337v21.326C0 23.4.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.466.099 2.797.143v3.24l-1.92.001c-1.504 0-1.796.715-1.796 1.764v2.313h3.59l-.467 3.622h-3.123V24h6.116c.728 0 1.324-.6 1.324-1.337V1.337C24 .6 23.403 0 22.675 0z"/>
+          </svg>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/sharunduu.fly" target="_blank" aria-label="Instagram"
+          class="hover:text-pink-600 hover:scale-110 transition-transform">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 2A3.75 3.75 0 004 7.75v8.5A3.75 3.75 0 007.75 20h8.5a3.75 3.75 0 003.75-3.75v-8.5A3.75 3.75 0 0016.25 4h-8.5zm8.25 2.25a1 1 0 110 2 1 1 0 010-2zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/>
+          </svg>
+        </a>
+
+        <!-- Twitter -->
+        <a href="https://twitter.com/yourusername" target="_blank" aria-label="Twitter"
+          class="hover:text-yellow-600 hover:scale-110 transition-transform">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M23 3a10.9 10.9 0 01-3.14.86A5.48 5.48 0 0022.4 1.84a10.86 10.86 0 01-3.45 1.3 5.43 5.43 0 00-9.3 4.95A15.4 15.4 0 011 4.39a5.42 5.42 0 001.67 7.26 5.36 5.36 0 01-2.44-.67v.07a5.43 5.43 0 004.36 5.32 5.45 5.45 0 01-2.44.09 5.43 5.43 0 005.07 3.77A10.9 10.9 0 012 21.54c-.44 0-.87-.03-1.3-.08A15.39 15.39 0 008.34 24c10 0 15.5-8.29 15.5-15.5l-.02-.7A11 11 0 0023 3z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+
+    <!-- Google Map (Smaller) -->
+    <div>
+      <h3 class="text-lg font-semibold mb-4 text-indigo-600 dark:text-indigo-400">📍 My Location</h3>
+      <div class="rounded-xl overflow-hidden shadow-md">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3689.8767321339674!2d91.84313577451971!3d22.35828284079263!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30ad276e3d11ddf3%3A0xf80e51252b33d23!2sBoro%20Miah%20Masjid!5e0!3m2!1sen!2sbd!4v1750322242888!5m2!1sen!2sbd"
+          width="100%" height="160" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Divider with Logo Right Next to Text -->
+<div class="border-t border-gray-300 dark:border-gray-700 mt-10 pt-4 px-4 text-sm text-gray-600 dark:text-gray-400 text-center flex items-center justify-center gap-2">
+  <span>© 2025 Sharif Islam. All rights reserved.</span>
+  <img src="logo-transparent.png" alt="Logo" class="w-16 h-16 rounded-full" />
+</div>
+
+  <!-- Back to Top Button -->
+  <button id="backToTopBtn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+    class="fixed left-4 bottom-8 hidden px-4 py-2 bg-indigo-600 text-white rounded-full hover:bg-pink-600 transition z-50">
+    ↑ Top
+  </button>
+</footer>
+
+<script>
+  const backToTopBtn = document.getElementById('backToTopBtn');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) { // Show button after 30px scroll
+      backToTopBtn.classList.remove('hidden');
+    } else {
+      backToTopBtn.classList.add('hidden');
+    }
+  });
+</script>
+
+
+
+<script>
+  function toggleDarkMode() {
+  const html = document.documentElement;
+  const iconDesktop = document.getElementById('darkModeToggle');
+  const iconMobile = document.getElementById('darkModeToggleMobile');
+
+  html.classList.toggle('dark');
+  const isDark = html.classList.contains('dark');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  if (iconDesktop) iconDesktop.textContent = isDark ? '☀️' : '🌙';
+  if (iconMobile) iconMobile.textContent = isDark ? '☀️' : '🌙';
+}
+
+// Load theme and sync icons
+window.addEventListener('DOMContentLoaded', () => {
+  const iconDesktop = document.getElementById('darkModeToggle');
+  const iconMobile = document.getElementById('darkModeToggleMobile');
+  const savedTheme = localStorage.getItem('theme');
+
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+
+  document.documentElement.classList.toggle('dark', shouldBeDark);
+  const icon = shouldBeDark ? '☀️' : '🌙';
+  if (iconDesktop) iconDesktop.textContent = icon;
+  if (iconMobile) iconMobile.textContent = icon;
+});
+</script>
+
+
+
+</body>
+</html>
