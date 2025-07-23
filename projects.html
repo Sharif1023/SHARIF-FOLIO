@@ -54,8 +54,9 @@
     });
   </script>
 
-<header class="bg-white shadow-md fixed top-0 w-full z-50 dark:bg-gray-800 transition-colors duration-300">
-  <div class="container mx-auto flex justify-between items-center px-4 py-4">
+
+  <header class="bg-white shadow-md fixed top-0 w-full z-50 dark:bg-gray-800 transition-colors duration-300">
+  <div class="max-w-screen-xl mx-auto w-full flex justify-between items-center px-4 py-4">
 
 
 
@@ -102,34 +103,64 @@
 
 
 
-    <!-- Navigation Menu -->
-    <nav id="mobileMenu" class="absolute top-full left-0 w-full bg-white shadow-md hidden md:flex md:static md:w-auto md:shadow-none space-y-2 md:space-y-0 md:space-x-6 items-center p-4 md:p-0 dark:bg-gray-800 transition-colors duration-300">
-      <a href="index.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Home</a>
-      <a href="projects.html" class="block text-blue-500 dark:hover:text-blue-400 font-semibold">Projects</a>
-      <a href="photo-gallery.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Gallery</a>
-      <a href="about.html" class="block hover:text-blue-500 dark:hover:text-blue-400">About</a>
-      <a href="contact.html" class="block hover:text-blue-500 dark:hover:text-blue-400 ">Contact</a>
+  <!-- Backdrop (for mobile only) -->
+<div id="backdrop" onclick="closeMenu()" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 md:hidden"></div>
 
-      <!-- Dark Mode Toggle for Desktop -->
-      <button onclick="toggleDarkMode()" id="darkModeToggle" aria-label="Toggle Dark Mode" 
-        class="hidden md:block text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 text-2xl transition focus:outline-none">
-        🌙
-      </button>
-    </nav>
+<!-- Navigation Menu -->
+ <nav id="mobileMenu"
+     class="fixed top-16 right-0 w-2/3 max-w-2xs bg-white dark:bg-gray-800 shadow-lg transform translate-x-full transition-transform duration-300 z-50
+            md:static md:translate-x-0 md:flex md:w-auto md:h-auto md:shadow-none md:space-x-6 md:space-y-0 space-y-4 p-6 md:p-0">
 
-    <!-- Right side on mobile: Hamburger + Dark Mode Toggle -->
-    <div class="flex items-center gap-4 md:hidden">
-      <!-- Hamburger Button (Mobile) -->
-      <button onclick="toggleMenu()" class="text-blue-600 dark:text-blue-400 text-2xl focus:outline-none">
-        ☰
-      </button>
 
-      <!-- Dark Mode Toggle for Mobile -->
-      <button onclick="toggleDarkMode()" id="darkModeToggleMobile" aria-label="Toggle Dark Mode" 
-        class="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 text-2xl transition focus:outline-none">
-        🌙
-      </button>
-    </div>
+  <a href="index.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Home</a>
+  <a href="projects.html" class="block text-blue-500 dark:hover:text-blue-400 font-semibold">Projects</a>
+  <a href="photo-gallery.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Gallery</a>
+  <a href="about.html" class="block hover:text-blue-500 dark:hover:text-blue-400">About</a>
+  <a href="contact.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Contact</a>
+
+  <!-- Dark Mode Toggle (desktop) -->
+  <button onclick="toggleDarkMode()" id="darkModeToggle" aria-label="Toggle Dark Mode" 
+    class="hidden md:block text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 text-2xl transition focus:outline-none">
+    🌙
+  </button>
+</nav>
+
+
+
+<!-- Right corner buttons (hamburger + dark mode) -->
+<div class="flex items-center gap-4 md:hidden z-50 relative">
+  <!-- Hamburger (mobile) -->
+  <button onclick="toggleMenu()" class="text-blue-600 dark:text-blue-400 text-2xl focus:outline-none">
+    ☰
+  </button>
+
+  <!-- Dark Mode Toggle (mobile) -->
+  <button onclick="toggleDarkMode()" id="darkModeToggleMobile" aria-label="Toggle Dark Mode" 
+    class="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 text-2xl transition focus:outline-none">
+    🌙
+  </button>
+</div>
+
+
+
+<script>
+  const menu = document.getElementById('mobileMenu');
+  const backdrop = document.getElementById('backdrop');
+
+  function toggleMenu() {
+    menu.classList.toggle('translate-x-full'); // Right side toggle
+    backdrop.classList.toggle('hidden');
+  }
+
+  function closeMenu() {
+    menu.classList.add('translate-x-full');
+    backdrop.classList.add('hidden');
+  }
+
+  function toggleDarkMode() {
+    document.documentElement.classList.toggle('dark');
+  }
+</script>
 
   </div>
 </header>
@@ -140,7 +171,10 @@
 <main class="max-w-6xl mx-auto px-4 py-20">
   <h1 class="text-4xl font-extrabold text-center text-indigo-700 mb-12">🚀 My Featured Projects</h1>
 
-  <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+
+
+
 
 
 
@@ -250,12 +284,13 @@
 
     <!-- Project Card 5 -->
     <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition group">
-      <img src="loding.avif" alt="E-commerce App" class="h-48 w-full object-cover group-hover:scale-105 transition-transform duration-300">
+      <img src="weather.jpg" alt="Portfolio Website" class="h-48 w-full object-cover group-hover:scale-105 transition-transform duration-300">
       <div class="p-6">
-        <h2 class="text-xl font-bold mb-2 text-indigo-700">🛒Another E-commerce App</h2>
-        <p class="text-gray-600 mb-3">Full-stack MERN shopping site with filtering, cart and payment system.</p>
-        <div class="text-xs inline-block bg-green-100 text-green-700 px-2 py-1 rounded-full mb-4">MERN Stack</div><br>
-        <a href="https" target="_blank"
+        <h2 class="text-xl font-bold mb-2 text-indigo-700">Weather Website</h2>
+        <p class="text-gray-600 mb-3">This is a responsive weather app built with React.js and Tailwind CSS. 
+          It features dark mode, a smooth UI, and provides real-time weather updates in a clean, modern design.</p>
+        <div class="text-xs inline-block bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full mb-4">React.js/Tailwind CSS</div><br>
+        <a href="https://w-app-topaz.vercel.app/" target="_blank"
      class="inline-flex items-center gap-2 text-sm font-semibold text-white bg-indigo-600 px-4 py-2 rounded-full shadow hover:bg-pink-600 hover:scale-105 transition-all duration-300 group">
     <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
     <path d="M12.293 3.293a1 1 0 011.414 0L19 8.586a2 2 0 010 2.828l-5.293 5.293a1 1 0 01-1.414-1.414L15.586 11H4a1 1 0 110-2h11.586l-3.293-3.293a1 1 0 010-1.414z" />
@@ -283,47 +318,7 @@
     </a>
       </div>
     </div>
-
-
-
-
-
-
-    <!-- Project Card 7 -->
-    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition group">
-      <img src="loding.avif" alt="Chat App" class="h-48 w-full object-cover group-hover:scale-105 transition-transform duration-300">
-      <div class="p-6">
-        <h2 class="text-xl font-bold mb-2 text-indigo-700">📱 Chat App</h2>
-        <p class="text-gray-600 mb-3">Real-time Firebase chat app with user authentication and status tracking.</p>
-        <div class="text-xs inline-block bg-blue-100 text-blue-700 px-2 py-1 rounded-full mb-4">Firebase</div><br>
-        <a href="https:" target="_blank"
-     class="inline-flex items-center gap-2 text-sm font-semibold text-white bg-indigo-600 px-4 py-2 rounded-full shadow hover:bg-pink-600 hover:scale-105 transition-all duration-300 group">
-    <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
-    <path d="M12.293 3.293a1 1 0 011.414 0L19 8.586a2 2 0 010 2.828l-5.293 5.293a1 1 0 01-1.414-1.414L15.586 11H4a1 1 0 110-2h11.586l-3.293-3.293a1 1 0 010-1.414z" />
-    </svg>
-    View Project
-    </a>
-      </div>
-    </div>
-
-
-
-    <!-- Project Card 8 -->
-    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition group">
-      <img src="loding.avif" alt="Dashboard" class="h-48 w-full object-cover group-hover:scale-105 transition-transform duration-300">
-      <div class="p-6">
-        <h2 class="text-xl font-bold mb-2 text-indigo-700">📊 Admin Dashboard</h2>
-        <p class="text-gray-600 mb-3">Interactive dashboard using Chart.js and Tailwind CSS for data analytics.</p>
-        <div class="text-xs inline-block bg-purple-100 text-purple-700 px-2 py-1 rounded-full mb-4">Tailwind + Chart.js</div><br>
-        <a href="https:" target="_blank"
-     class="inline-flex items-center gap-2 text-sm font-semibold text-white bg-indigo-600 px-4 py-2 rounded-full shadow hover:bg-pink-600 hover:scale-105 transition-all duration-300 group">
-    <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
-    <path d="M12.293 3.293a1 1 0 011.414 0L19 8.586a2 2 0 010 2.828l-5.293 5.293a1 1 0 01-1.414-1.414L15.586 11H4a1 1 0 110-2h11.586l-3.293-3.293a1 1 0 010-1.414z" />
-    </svg>
-    View Project
-    </a>
-      </div>
-    </div>
+ </div>
 
 
 </div>
