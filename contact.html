@@ -162,95 +162,116 @@
     ✅ Thank you! Your message has been sent successfully.
   </div>
 
-  <!-- Contact Form -->
-  <form id="contactForm" class="space-y-5 bg-white dark:bg-gray-800 p-6 shadow-xl rounded-xl transition-colors duration-300">
+  <form id="contactForm" novalidate class="space-y-5 bg-white dark:bg-gray-800 p-6 shadow-xl rounded-xl transition-colors duration-300">
+  <!-- Hidden FormSubmit Config -->
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_next" value="">
+  <input type="text" name="_honey" style="display:none">
 
-    <!-- Hidden FormSubmit Config -->
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_next" value=""> <!-- Add a URL here for redirection -->
+  <!-- Name -->
+  <input type="text" name="name" placeholder="Your Name"
+    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+    required />
 
-    <!-- Honeypot Anti-Spam -->
-    <input type="text" name="_honey" style="display:none">
+  <!-- Email -->
+  <input type="email" id="emailInput" name="email" placeholder="Your Email"
+    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+    required />
+  <p id="emailError" class="text-red-600 text-sm mt-1 hidden">Please enter a valid email address.</p>
 
-    <!-- Name -->
-    <input type="text" name="name" placeholder="Your Name"
-      class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
-      required />
+  <!-- Message -->
+  <textarea name="message" placeholder="Your Message"
+    class="w-full p-3 border border-gray-300 rounded-lg h-36 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-400 transition bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+    required></textarea>
 
-    <!-- Email -->
-    <input type="email" id="emailInput" name="email" placeholder="Your Email"
-      class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
-      required />
-    <p id="emailError" class="text-red-600 text-sm mt-1 hidden">Please enter a valid email address.</p>
-
-    <!-- Message -->
-    <textarea name="message" placeholder="Your Message"
-      class="w-full p-3 border border-gray-300 rounded-lg h-36 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-400 transition bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
-      required></textarea>
-
-    <!-- Submit Button -->
-    <button type="submit" name="submit"
-      class="w-full bg-indigo-600 dark:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-pink-600 dark:hover:bg-pink-700 transition">
-      📩 Send Message
-    </button>
-  </form>
+  <!-- Submit Button -->
+  <button type="submit" name="submit"
+    class="w-full bg-indigo-600 dark:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-pink-600 dark:hover:bg-pink-700 transition">
+    📩 Send Message
+  </button>
+</form>
 </main>
 
+
 <script>
-  document.getElementById('contactForm').addEventListener('submit', function (e) {
+  const contactForm = document.getElementById("contactForm");
+  const emailInput = document.getElementById("emailInput");
+  const emailError = document.getElementById("emailError");
+  const thankYouMessage = document.getElementById("thankYouMessage");
+
+  // Only Gmail validation
+  const emailPattern = /^[a-zA-Z0-9._%+-]{2,}@gmail\.com$/;
+
+  // Live validation
+  emailInput.addEventListener("input", () => {
+    if (!emailPattern.test(emailInput.value.trim())) {
+      emailError.textContent = "Please enter a valid Gmail address (example@gmail.com)";
+      emailError.classList.remove("hidden");
+      emailInput.classList.add("border-red-500", "focus:ring-red-400");
+      emailInput.classList.remove("border-gray-300", "focus:ring-indigo-400");
+    } else {
+      emailError.classList.add("hidden");
+      emailInput.classList.remove("border-red-500", "focus:ring-red-400");
+      emailInput.classList.add("border-gray-300", "focus:ring-indigo-400");
+    }
+    thankYouMessage.classList.add("hidden");
+    thankYouMessage.style.opacity = "1"; // Reset opacity for fade-in next time
+  });
+
+  // Form submit
+  contactForm.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const form = e.target;
-    const emailInput = document.getElementById('emailInput');
-    const emailError = document.getElementById('emailError');
-    const emailValue = emailInput.value.trim();
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const submitBtn = form.querySelector('button[type="submit"]');
+    const name = this.name.value.trim();
+    const email = emailInput.value.trim();
+    const message = this.message.value.trim();
 
-    // Email validation
-    if (!emailPattern.test(emailValue)) {
-      emailError.classList.remove('hidden');
-      emailInput.classList.add('border-red-600', 'focus:ring-red-600');
-      emailInput.focus();
+    // Stop submit if email invalid
+    if (!emailPattern.test(email)) {
+      emailError.classList.remove("hidden");
       return;
     }
 
-    // Hide error if valid
-    emailError.classList.add('hidden');
-    emailInput.classList.remove('border-red-600', 'focus:ring-red-600');
+    try {
+      const response = await fetch("http://localhost:5000/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message })
+      });
 
-    const formData = new FormData(form);
+      const result = await response.json();
 
-    // Disable submit button
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Sending...";
+      if (result.success) {
+        // Show success message
+        thankYouMessage.classList.remove("hidden");
+        thankYouMessage.style.opacity = "1";
 
-    // Submit with fetch
-    fetch("https://formsubmit.co/sharifislam02001@gmail.com", {
-      method: "POST",
-      body: formData
-    }).then(response => {
-      // Show thank you message
-      document.getElementById('thankYouMessage').classList.remove('hidden');
-      form.reset();
-    }).catch(error => {
-      alert("Something went wrong. Please try again.");
-    }).finally(() => {
-      // Re-enable button
-      submitBtn.disabled = false;
-      submitBtn.textContent = "📩 Send Message";
+        // Reset form
+        this.reset();
+        emailInput.classList.remove("border-red-500", "focus:ring-red-400");
+        emailInput.classList.add("border-gray-300", "focus:ring-indigo-400");
 
-      // Hide thank-you after 3 sec
-      setTimeout(() => {
-        document.getElementById('thankYouMessage').classList.add('hidden');
-      }, 3000);
-    });
-  });
-
-  // Clear error message while typing
-  document.getElementById('emailInput').addEventListener('input', () => {
-    document.getElementById('emailError').classList.add('hidden');
-    document.getElementById('emailInput').classList.remove('border-red-600', 'focus:ring-red-600');
+        // Fade-out after 3 seconds
+        setTimeout(() => {
+          let opacity = 1;
+          const fadeEffect = setInterval(() => {
+            if (opacity <= 0.05) {
+              clearInterval(fadeEffect);
+              thankYouMessage.classList.add("hidden");
+              thankYouMessage.style.opacity = "1"; // Reset for next submit
+            } else {
+              opacity -= 0.05;
+              thankYouMessage.style.opacity = opacity;
+            }
+          }, 50); // 50ms interval → 3~4 seconds total
+        }, 3000); // Wait 3 seconds before starting fade
+      } else {
+        alert(result.error || "Something went wrong.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Server connection failed.");
+    }
   });
 </script>
 
