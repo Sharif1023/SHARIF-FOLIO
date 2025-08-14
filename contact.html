@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" class="">
 <head>
@@ -44,10 +45,9 @@
     });
   </script>
 
+<header class="bg-white shadow-md fixed top-0 w-full z-50 dark:bg-gray-800 transition-colors duration-300">
+  <div class="container mx-auto flex justify-between items-center px-4 py-4">
 
-  <header class="bg-white shadow-md fixed top-0 w-full z-50 dark:bg-gray-800 transition-colors duration-300">
-  <div class="max-w-screen-xl mx-auto w-full flex justify-between items-center px-4 py-4">
-    
   <!-- Logo with image -->
 <a href="index.html" class="logo flex items-center space-x-2">
   <img src="logo-transparent.png" alt="Logo" class="w-10 h-10 rounded-full" />
@@ -89,60 +89,34 @@
 </style>
 
 
-<!-- Backdrop (for mobile only) -->
-<div id="backdrop" onclick="closeMenu()" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 md:hidden"></div>
+    <!-- Navigation Menu -->
+    <nav id="mobileMenu" class="absolute top-full left-0 w-full bg-white shadow-md hidden md:flex md:static md:w-auto md:shadow-none space-y-2 md:space-y-0 md:space-x-6 items-center p-4 md:p-0 dark:bg-gray-800 transition-colors duration-300">
+      <a href="index.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Home</a>
+      <a href="projects.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Projects</a>
+      <a href="photo-gallery.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Gallery</a>
+      <a href="about.html" class="block hover:text-blue-500 dark:hover:text-blue-400">About</a>
+      <a href="contact.html" class="block text-blue-500 dark:hover:text-blue-400 font-semibold">Contact</a>
 
-<!-- Navigation Menu (mobile: slide from right, partial height) -->
-<nav id="mobileMenu"
-     class="fixed top-16 right-0 w-2/3 max-w-2xs bg-white dark:bg-gray-800 shadow-lg transform translate-x-full transition-transform duration-300 z-50
-            md:static md:translate-x-0 md:flex md:w-auto md:h-auto md:shadow-none md:space-x-6 md:space-y-0 space-y-4 p-6 md:p-0">
-  <a href="index.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Home</a>
-  <a href="projects.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Projects</a>
-  <a href="photo-gallery.html" class="block hover:text-blue-500 dark:hover:text-blue-400">Gallery</a>
-  <a href="about.html" class="block hover:text-blue-500 dark:hover:text-blue-400">About</a>
-  <a href="contact.html" class="block text-blue-500 dark:hover:text-blue-400 font-semibold">Contact</a>
+      <!-- Dark Mode Toggle for Desktop -->
+      <button onclick="toggleDarkMode()" id="darkModeToggle" aria-label="Toggle Dark Mode" 
+        class="hidden md:block text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 text-2xl transition focus:outline-none">
+        🌙
+      </button>
+    </nav>
 
-  <!-- Dark Mode Toggle (desktop) -->
-  <button onclick="toggleDarkMode()" id="darkModeToggle" aria-label="Toggle Dark Mode" 
-    class="hidden md:block text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 text-2xl transition focus:outline-none">
-    🌙
-  </button>
-</nav>
+    <!-- Right side on mobile: Hamburger + Dark Mode Toggle -->
+    <div class="flex items-center gap-4 md:hidden">
+      <!-- Hamburger Button (Mobile) -->
+      <button onclick="toggleMenu()" class="text-blue-600 dark:text-blue-400 text-2xl focus:outline-none">
+        ☰
+      </button>
 
-<!-- Right corner buttons (hamburger + dark mode) -->
-<div class="flex items-center gap-4 md:hidden z-50 relative">
-  <!-- Hamburger (mobile) -->
-  <button onclick="toggleMenu()" class="text-blue-600 dark:text-blue-400 text-2xl focus:outline-none">
-    ☰
-  </button>
-
-  <!-- Dark Mode Toggle (mobile) -->
-  <button onclick="toggleDarkMode()" id="darkModeToggleMobile" aria-label="Toggle Dark Mode" 
-    class="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 text-2xl transition focus:outline-none">
-    🌙
-  </button>
-</div>
-
-
-
-<script>
-  const menu = document.getElementById('mobileMenu');
-  const backdrop = document.getElementById('backdrop');
-
-  function toggleMenu() {
-    menu.classList.toggle('translate-x-full'); // Right side toggle
-    backdrop.classList.toggle('hidden');
-  }
-
-  function closeMenu() {
-    menu.classList.add('translate-x-full');
-    backdrop.classList.add('hidden');
-  }
-
-  function toggleDarkMode() {
-    document.documentElement.classList.toggle('dark');
-  }
-</script>
+      <!-- Dark Mode Toggle for Mobile -->
+      <button onclick="toggleDarkMode()" id="darkModeToggleMobile" aria-label="Toggle Dark Mode" 
+        class="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 text-2xl transition focus:outline-none">
+        🌙
+      </button>
+    </div>
 
   </div>
 </header>
@@ -162,116 +136,95 @@
     ✅ Thank you! Your message has been sent successfully.
   </div>
 
-  <form id="contactForm" novalidate class="space-y-5 bg-white dark:bg-gray-800 p-6 shadow-xl rounded-xl transition-colors duration-300">
-  <!-- Hidden FormSubmit Config -->
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_next" value="">
-  <input type="text" name="_honey" style="display:none">
+  <!-- Contact Form -->
+  <form id="contactForm" class="space-y-5 bg-white dark:bg-gray-800 p-6 shadow-xl rounded-xl transition-colors duration-300">
 
-  <!-- Name -->
-  <input type="text" name="name" placeholder="Your Name"
-    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
-    required />
+    <!-- Hidden FormSubmit Config -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value=""> <!-- Add a URL here for redirection -->
 
-  <!-- Email -->
-  <input type="email" id="emailInput" name="email" placeholder="Your Email"
-    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
-    required />
-  <p id="emailError" class="text-red-600 text-sm mt-1 hidden">Please enter a valid email address.</p>
+    <!-- Honeypot Anti-Spam -->
+    <input type="text" name="_honey" style="display:none">
 
-  <!-- Message -->
-  <textarea name="message" placeholder="Your Message"
-    class="w-full p-3 border border-gray-300 rounded-lg h-36 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-400 transition bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
-    required></textarea>
+    <!-- Name -->
+    <input type="text" name="name" placeholder="Your Name"
+      class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+      required />
 
-  <!-- Submit Button -->
-  <button type="submit" name="submit"
-    class="w-full bg-indigo-600 dark:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-pink-600 dark:hover:bg-pink-700 transition">
-    📩 Send Message
-  </button>
-</form>
+    <!-- Email -->
+    <input type="email" id="emailInput" name="email" placeholder="Your Email"
+      class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+      required />
+    <p id="emailError" class="text-red-600 text-sm mt-1 hidden">Please enter a valid email address.</p>
+
+    <!-- Message -->
+    <textarea name="message" placeholder="Your Message"
+      class="w-full p-3 border border-gray-300 rounded-lg h-36 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-400 transition bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+      required></textarea>
+
+    <!-- Submit Button -->
+    <button type="submit" name="submit"
+      class="w-full bg-indigo-600 dark:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-pink-600 dark:hover:bg-pink-700 transition">
+      📩 Send Message
+    </button>
+  </form>
 </main>
 
-
 <script>
-  const contactForm = document.getElementById("contactForm");
-  const emailInput = document.getElementById("emailInput");
-  const emailError = document.getElementById("emailError");
-  const thankYouMessage = document.getElementById("thankYouMessage");
-
-  // Only Gmail validation
-  const emailPattern = /^[a-zA-Z0-9._%+-]{2,}@gmail\.com$/;
-
-  // Live validation
-  emailInput.addEventListener("input", () => {
-    if (!emailPattern.test(emailInput.value.trim())) {
-      emailError.textContent = "Please enter a valid Gmail address (example@gmail.com)";
-      emailError.classList.remove("hidden");
-      emailInput.classList.add("border-red-500", "focus:ring-red-400");
-      emailInput.classList.remove("border-gray-300", "focus:ring-indigo-400");
-    } else {
-      emailError.classList.add("hidden");
-      emailInput.classList.remove("border-red-500", "focus:ring-red-400");
-      emailInput.classList.add("border-gray-300", "focus:ring-indigo-400");
-    }
-    thankYouMessage.classList.add("hidden");
-    thankYouMessage.style.opacity = "1"; // Reset opacity for fade-in next time
-  });
-
-  // Form submit
-  contactForm.addEventListener("submit", async function (e) {
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const name = this.name.value.trim();
-    const email = emailInput.value.trim();
-    const message = this.message.value.trim();
+    const form = e.target;
+    const emailInput = document.getElementById('emailInput');
+    const emailError = document.getElementById('emailError');
+    const emailValue = emailInput.value.trim();
+    const emailPattern = /^[a-zA-Z0-9._%+-]{2,}@gmail\.com$/;
+    const submitBtn = form.querySelector('button[type="submit"]');
 
-    // Stop submit if email invalid
-    if (!emailPattern.test(email)) {
-      emailError.classList.remove("hidden");
+    // Email validation
+    if (!emailPattern.test(emailValue)) {
+      emailError.classList.remove('hidden');
+      emailInput.classList.add('border-red-600', 'focus:ring-red-600');
+      emailInput.focus();
       return;
     }
 
-    try {
-      const response = await fetch("http://localhost:5000/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message })
-      });
+    // Hide error if valid
+    emailError.classList.add('hidden');
+    emailInput.classList.remove('border-red-600', 'focus:ring-red-600');
 
-      const result = await response.json();
+    const formData = new FormData(form);
 
-      if (result.success) {
-        // Show success message
-        thankYouMessage.classList.remove("hidden");
-        thankYouMessage.style.opacity = "1";
+    // Disable submit button
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
 
-        // Reset form
-        this.reset();
-        emailInput.classList.remove("border-red-500", "focus:ring-red-400");
-        emailInput.classList.add("border-gray-300", "focus:ring-indigo-400");
+    // Submit with fetch
+    fetch("https://formsubmit.co/sharifislam02001@gmail.com", {
+      method: "POST",
+      body: formData
+    }).then(response => {
+      // Show thank you message
+      document.getElementById('thankYouMessage').classList.remove('hidden');
+      form.reset();
+    }).catch(error => {
+      alert("Something went wrong. Please try again.");
+    }).finally(() => {
+      // Re-enable button
+      submitBtn.disabled = false;
+      submitBtn.textContent = "📩 Send Message";
 
-        // Fade-out after 3 seconds
-        setTimeout(() => {
-          let opacity = 1;
-          const fadeEffect = setInterval(() => {
-            if (opacity <= 0.05) {
-              clearInterval(fadeEffect);
-              thankYouMessage.classList.add("hidden");
-              thankYouMessage.style.opacity = "1"; // Reset for next submit
-            } else {
-              opacity -= 0.05;
-              thankYouMessage.style.opacity = opacity;
-            }
-          }, 50); // 50ms interval → 3~4 seconds total
-        }, 3000); // Wait 3 seconds before starting fade
-      } else {
-        alert(result.error || "Something went wrong.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Server connection failed.");
-    }
+      // Hide thank-you after 3 sec
+      setTimeout(() => {
+        document.getElementById('thankYouMessage').classList.add('hidden');
+      }, 3000);
+    });
+  });
+
+  // Clear error message while typing
+  document.getElementById('emailInput').addEventListener('input', () => {
+    document.getElementById('emailError').classList.add('hidden');
+    document.getElementById('emailInput').classList.remove('border-red-600', 'focus:ring-red-600');
   });
 </script>
 
